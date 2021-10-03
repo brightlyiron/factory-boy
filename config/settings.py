@@ -47,6 +47,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+USER_APPS = [
+    'blog',
+]
+
+INSTALLED_APPS += USER_APPS
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
