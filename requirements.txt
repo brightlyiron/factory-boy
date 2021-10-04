@@ -9,4 +9,5 @@ django-cors-headers==3.7.0
 psycopg2
 pytest
 pytest-django
+pytest-cov
 factory-boy
