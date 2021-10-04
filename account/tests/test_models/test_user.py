@@ -28,13 +28,13 @@ def test_fields():
     assert user.check_password(test_username)
 
 
-def test_username_field():
+def test_username_field_max_length():
     max_length = 150
     username_max_length = user_model._meta.get_field('username').max_length
     assert max_length == username_max_length
 
 
-def test_password_field():
+def test_password_field_max_length():
     max_length = 128
     password_max_length = user_model._meta.get_field('password').max_length
     assert max_length == password_max_length

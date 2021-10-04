@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 ]
 
 USER_APPS = [
+    'account',
     'blog',
 ]
 
