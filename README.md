@@ -1,10 +1,10 @@
 # Factory Boy Study
 
-<img alt="Python" src ="https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white"/>
-<img alt="Pytest" src ="https://img.shields.io/badge/Pytest-0A9EDC.svg?&style=for-the-badge&logo=Pytest&logoColor=white"/>
-<img alt="Docker" src ="https://img.shields.io/badge/Docker-2496ED.svg?&style=for-the-badge&logo=Docker&logoColor=white"/>
-<img alt="Django" src ="https://img.shields.io/badge/Django-092E20.svg?&style=for-the-badge&logo=Django&logoColor=white"/>
-<img alt="PostgreSQL" src ="https://img.shields.io/badge/PostgreSQL-4169E1.svg?&style=for-the-badge&logo=PostgreSQL&logoColor=white"/>
+![Python](https://img.shields.io/badge/Python-3776AB.svg?&style=for-the-badge&logo=Python&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-0A9EDC.svg?&style=for-the-badge&logo=Pytest&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED.svg?&style=for-the-badge&logo=Docker&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20.svg?&style=for-the-badge&logo=Django&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1.svg?&style=for-the-badge&logo=PostgreSQL&logoColor=white)
 
 ORM-Based Fixtures Manager 도구인 `factory-boy` 학습 프로젝트 입니다.
 
@@ -25,8 +25,19 @@ docker-compoe -f local.yml up -d
 ```
 
 ## 환경변수
+ 아래와 같은 환경변수를 지원합니다.
 
-본 프로젝트는 로컬에서의 환경을 별도로 지원하기 위해 `DJANGO_READ_DOT_ENV_FILE` 환경 변수를 지원합니다. 따라서 아래 작업을 통해 로컬에서 또한 작업이 가능합니다
+|idx|변수|자료형|디폴트|설명|
+|---|---|---|---|---|
+|1|DJANGO_READ_DOT_ENV_FILE|`bool`|`False`|프로젝트 루트 디렉토리의 `.env` 파일을 찾아 환경변수를 다시 씁니다.|
+|2|DJANGO_SECRET_KEY|`string`|`django-secret-key`|장고 비밀키를 입력 받습니다.|
+|3|DJANGO_DEBULG|`bool`|`True`|장고 서버의 디버그 모드를 결정합니다.|
+|4|DATABASE_URL|`string`|`None`|장고 서버의 디폴트 데이터베이스 연결 정보를 입력받습니다.|
+
+
+
+## 로컬 환경
+본 프로젝트는 로컬 환경을 지원하기 위해 `DJANGO_READ_DOT_ENV_FILE` 환경 변수를 지원합니다. 따라서 아래 작업을 통해 로컬에서 또한 작업이 가능합니다
 
 1. DJANGO_READ_DOT_ENV_FILE 환경변수를 `True` 값으로 설정해줍니다.
 
@@ -41,20 +52,14 @@ touch .env
 ```
 
 3. 필요한 환경 변수를 채워줍니다.
-
-|idx|변수|자료형|디폴트|설명|
-|---|---|---|---|---|
-|1|DJANGO_READ_DOT_ENV_FILE|`bool`|`False`|프로젝트 루트 디렉토리의 `.env` 파일을 찾아 환경변수를 다시 씁니다.|
-|2|DJANGO_SECRET_KEY|`string`|`django-secret-key`|장고 비밀키를 입력 받습니다.|
-|3|DJANGO_DEBULG|`bool`|`True`|장고 서버의 디버그 모드를 결정합니다.|
-|4|DATABASE_URL|`string`|`None`|장고 서버의 디폴트 데이터베이스 연결 정보를 입력받습니다.|
-
-4.로컬에서 장고 서버를 동작 합니다.
+```text
+DATABASE_URL="postgres://debug:debug@localhost:5432/factory_boy_study"
+```
+4. 로컬에서 장고 서버를 동작 합니다.
 
 ```shell
 python manage.py runserver
 ```
-
 ## 테스트
 
 테스트는 pytest 모듈을 기반으로 다양한 플러그인으로 구성했습니다.
