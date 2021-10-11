@@ -16,8 +16,14 @@ class Post(models.Model):
         related_query_name='post'
     )
     author_name = models.CharField(_("유저이름"), max_length=150)
-
-    tag = models.ManyToManyField(
+    likes = models.ManyToManyField(
+        User,
+        verbose_name=_("좋아요"),
+        related_name='likes',
+        related_query_name='like',
+        through='blog.Like'
+    )
+    tags = models.ManyToManyField(
         'blog.Tag',
         verbose_name=_("태그"),
         related_name='tags',
@@ -35,3 +41,31 @@ class Tag(models.Model):
 
     class Meta:
         db_table = 'TAG'
+
+
+class Like(models.Model):
+    user = models.ForeignKey(
+        User,
+        verbose_name=_("좋아요 유저"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+        related_name='user_likes',
+        related_query_name='user_like'
+    )
+    username = models.CharField(_("유저이름"), max_length=150)
+    post = models.ForeignKey(
+        Post,
+        verbose_name=_("좋아요 글"),
+        on_delete=models.CASCADE,
+        related_name='post_likes',
+        related_query_name='post_like'
+    )
+    reg_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'LIKE'
+        constraints = [
+            models.UniqueConstraint(fields=['post', 'user'], name='only_one_like')
+        ]
