@@ -1,7 +1,9 @@
 import logging
 
 import pytest
+from django.contrib.auth.models import User
 
+from account.models import Profile
 from account.tests.factories.profile import ProfileFactory
 from account.tests.factories.user import UserFactory
 
